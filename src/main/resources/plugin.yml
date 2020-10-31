@@ -1,0 +1,6 @@
+name: SuperDiscord
+version: ${project.version}
+main: me.stefan923.superdiscord.SuperDiscord
+description: Amazing Discord integration for Bukkit servers.
+softdepend: [LiteBans,UltimateAfk,Essentials,PlaceholderAPI]
+authors: [Stefan923]
