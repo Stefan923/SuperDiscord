@@ -1,4 +1,4 @@
-package me.stefan923.superdiscord.commands.discord.type;
+package me.stefan923.superdiscord.commands.discord.type.config;
 
 import me.stefan923.superdiscord.SuperDiscord;
 import me.stefan923.superdiscord.commands.discord.AbstractCommand;

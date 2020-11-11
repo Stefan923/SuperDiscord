@@ -1,6 +1,5 @@
-package me.stefan923.superdiscord.commands.discord.type;
+package me.stefan923.superdiscord.commands.discord.type.server;
 
-import FactionsTopV5.FactionsTopPlugin;
 import me.stefan923.superdiscord.SuperDiscord;
 import me.stefan923.superdiscord.commands.discord.AbstractCommand;
 import me.stefan923.superdiscord.language.Language;
@@ -10,33 +9,19 @@ import me.stefan923.superdiscord.utils.discord.DiscordMessageUtils;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import org.bukkit.Bukkit;
 
 import java.awt.*;
 
-public class CommandFactionsTop extends AbstractCommand implements DiscordMessageUtils, ConversionUtils {
-
-    private final FactionsTopPlugin factionsTopPlugin;
-
-    public CommandFactionsTop() {
-        super(null, false, "ftop");
-
-        factionsTopPlugin = (FactionsTopPlugin) Bukkit.getServer().getPluginManager().getPlugin("FactionsTop");
+public class CommandServerGList extends AbstractCommand implements DiscordMessageUtils, ConversionUtils {
+    public CommandServerGList(AbstractCommand abstractCommand) {
+        super(abstractCommand, false, "glist");
     }
 
     @Override
     protected ReturnType runCommand(SuperDiscord instance, MessageReceivedEvent event, User sender, String... args) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 1; i <= 15; i++) {
-            if (!(factionsTopPlugin.rankings.size() < i)) {
-                String factionID = factionsTopPlugin.rankings.get(i);
-                stringBuilder.append(replacePlaceholders(factionsTopPlugin, factionID, Language.FACTIONS_TOP.replace("%ftop_rank%", String.valueOf(i)))).append("\n");
-            }
-        }
-
         EmbedBuilder embedBuilder = new EmbedBuilder();
-        embedBuilder.setAuthor("SuperDiscord Factions - top", null, "https://i.imgur.com/3kLXEoy.png");
-        embedBuilder.setDescription(stringBuilder);
+        embedBuilder.setAuthor("Server statistics - global list", null, "https://i.imgur.com/qIQee8z.png");
+        embedBuilder.setDescription(replacePlaceholders(null, Language.SERVER_GLIST));
         embedBuilder.setColor(Color.decode("0x0092e2"));
         embedBuilder.setFooter("Requested by " + sender.getName() + " | Answered in " + (System.currentTimeMillis() - event.getMessage().getTimeCreated().toInstant().toEpochMilli()) + " ms", sender.getAvatarUrl());
         sendEmbededMessage(event.getTextChannel(), embedBuilder);
@@ -51,7 +36,7 @@ public class CommandFactionsTop extends AbstractCommand implements DiscordMessag
 
     @Override
     public String getSyntax() {
-        return Setting.COMMAND_PREFIX + "ftop";
+        return Setting.COMMAND_PREFIX + "server glist";
     }
 
     @Override

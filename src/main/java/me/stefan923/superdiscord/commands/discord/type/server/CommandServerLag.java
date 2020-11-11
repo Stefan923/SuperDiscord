@@ -1,4 +1,4 @@
-package me.stefan923.superdiscord.commands.discord.type;
+package me.stefan923.superdiscord.commands.discord.type.server;
 
 import com.earth2me.essentials.Essentials;
 import me.stefan923.superdiscord.SuperDiscord;

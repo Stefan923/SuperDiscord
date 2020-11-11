@@ -1,8 +1,6 @@
-package me.stefan923.superdiscord.commands.discord.type;
+package me.stefan923.superdiscord.commands.discord.type.factions;
 
 import FactionsTopV5.FactionsTopPlugin;
-import com.massivecraft.factions.Faction;
-import com.massivecraft.factions.Factions;
 import me.stefan923.superdiscord.SuperDiscord;
 import me.stefan923.superdiscord.commands.discord.AbstractCommand;
 import me.stefan923.superdiscord.language.Language;
@@ -16,23 +14,29 @@ import org.bukkit.Bukkit;
 
 import java.awt.*;
 
-public class CommandFactionsTopInfo extends AbstractCommand implements DiscordMessageUtils, ConversionUtils {
+public class CommandFactionsTop extends AbstractCommand implements DiscordMessageUtils, ConversionUtils {
 
     private final FactionsTopPlugin factionsTopPlugin;
 
-    public CommandFactionsTopInfo() {
-        super(null, true, "ftop");
+    public CommandFactionsTop() {
+        super(null, false, "ftop");
 
         factionsTopPlugin = (FactionsTopPlugin) Bukkit.getServer().getPluginManager().getPlugin("FactionsTop");
     }
 
     @Override
     protected ReturnType runCommand(SuperDiscord instance, MessageReceivedEvent event, User sender, String... args) {
-        final Faction faction = Factions.getInstance().getByTag(args[0]);
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 1; i <= 15; i++) {
+            if (!(factionsTopPlugin.rankings.size() < i)) {
+                String factionID = factionsTopPlugin.rankings.get(i);
+                stringBuilder.append(replacePlaceholders(factionsTopPlugin, factionID, Language.FACTIONS_TOP.replace("%ftop_rank%", String.valueOf(i)))).append("\n");
+            }
+        }
 
         EmbedBuilder embedBuilder = new EmbedBuilder();
-        embedBuilder.setAuthor("SuperDiscord Factions - faction info", null, "https://i.imgur.com/3kLXEoy.png");
-        embedBuilder.setDescription(replacePlaceholders(factionsTopPlugin, faction.getId(), Language.FACTIONS_TOP_INFO));
+        embedBuilder.setAuthor("SuperDiscord Factions - top", null, "https://i.imgur.com/3kLXEoy.png");
+        embedBuilder.setDescription(stringBuilder);
         embedBuilder.setColor(Color.decode("0x0092e2"));
         embedBuilder.setFooter("Requested by " + sender.getName() + " | Answered in " + (System.currentTimeMillis() - event.getMessage().getTimeCreated().toInstant().toEpochMilli()) + " ms", sender.getAvatarUrl());
         sendEmbededMessage(event.getTextChannel(), embedBuilder);
