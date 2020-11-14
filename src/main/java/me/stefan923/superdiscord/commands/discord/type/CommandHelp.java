@@ -42,7 +42,7 @@ public class CommandHelp extends AbstractCommand implements DiscordMessageUtils,
 
     @Override
     public String getSyntax() {
-        return Setting.COMMAND_PREFIX + "server <stats>";
+        return "**" + Setting.COMMAND_PREFIX + "help**";
     }
 
     @Override
