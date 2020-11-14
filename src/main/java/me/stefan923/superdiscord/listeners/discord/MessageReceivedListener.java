@@ -16,6 +16,7 @@ public class MessageReceivedListener extends ListenerAdapter {
         this.commandManager = plugin.getDiscordCommandManager();
     }
 
+    @Override
     public void onMessageReceived(MessageReceivedEvent event) {
         String message = event.getMessage().getContentRaw();
 
