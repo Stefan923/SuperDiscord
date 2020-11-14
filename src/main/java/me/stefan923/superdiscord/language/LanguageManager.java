@@ -3,6 +3,7 @@ package me.stefan923.superdiscord.language;
 import me.stefan923.superdiscord.SuperDiscord;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -90,6 +91,15 @@ public class LanguageManager {
         config.set("Hooks.Factions.Top", Language.FACTIONS_TOP);
         config.set("Hooks.Factions.Info", Language.FACTIONS_TOP_INFO);
         try {
+            config.save(cfile);
+        } catch (IOException e) {
+            Bukkit.getLogger().severe(ChatColor.RED + "File 'language.yml' couldn't be saved!");
+        }
+    }
+
+    public void save(String content) throws InvalidConfigurationException {
+        try {
+            config.loadFromString(content);
             config.save(cfile);
         } catch (IOException e) {
             Bukkit.getLogger().severe(ChatColor.RED + "File 'language.yml' couldn't be saved!");
