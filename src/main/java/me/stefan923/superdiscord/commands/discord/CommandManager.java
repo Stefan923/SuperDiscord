@@ -48,12 +48,14 @@ public class CommandManager implements DiscordMessageUtils {
         }
 
         AbstractCommand commandConfig = addCommand(new CommandConfig());
-        addCommand(new CommandConfigSetChannel(commandConfig));
-        addCommand(new CommandConfigSetPrefix(commandConfig));
-        addCommand(new CommandConfigSetCommand(commandConfig));
         addCommand(new CommandConfigGetLang(commandConfig));
+        addCommand(new CommandConfigSetChannel(commandConfig));
+        addCommand(new CommandConfigSetCommand(commandConfig));
+        addCommand(new CommandConfigSetLang(commandConfig));
+        addCommand(new CommandConfigSetPrefix(commandConfig));
 
         addCommand(new CommandHelp());
+        addCommand(new CommandReload());
 
         if (Setting.ENABLED_COMMANDS_FTOP) {
             addCommand(new CommandFactionsTop());
