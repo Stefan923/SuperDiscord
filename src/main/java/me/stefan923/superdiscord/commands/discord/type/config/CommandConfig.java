@@ -28,7 +28,9 @@ public class CommandConfig extends AbstractCommand implements DiscordMessageUtil
         embedBuilder.setTitle("List of SuperDiscord subcommands for `%config`:");
         embedBuilder.setDescription("**" + Setting.COMMAND_PREFIX + "config setchannel <helpop>** - Configures the channel id on which certain facilities can be used.\n" +
                 "**" + Setting.COMMAND_PREFIX + "config setprefix <prefix>** - Configures the command prefix for SuperDiscord.\n" +
-                "**" + Setting.COMMAND_PREFIX + "config setcommand <command> <true|false>** - Enables/Disables a command.\n");
+                "**" + Setting.COMMAND_PREFIX + "config setcommand <command> <true|false>** - Enables/Disables a command.\n" +
+                "**" + Setting.COMMAND_PREFIX + "config getlang** - Uploads `language.yml` file's content to Hastebin.\n" +
+                "**" + Setting.COMMAND_PREFIX + "config setlang <linkID>** - Loads `language.yml` file's content from Hastebin.\n");
         embedBuilder.setColor(Color.decode("0x0092e2"));
         embedBuilder.setFooter("Requested by " + user.getName() + " | Answered in " + (System.currentTimeMillis() - event.getMessage().getTimeCreated().toInstant().toEpochMilli()) + " ms", user.getAvatarUrl());
         sendEmbededMessage(event.getTextChannel(), embedBuilder);
