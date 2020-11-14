@@ -2,12 +2,12 @@ package me.stefan923.superdiscord;
 
 import litebans.api.Database;
 import me.stefan923.superdiscord.commands.discord.CommandManager;
+import me.stefan923.superdiscord.language.LanguageManager;
 import me.stefan923.superdiscord.listeners.bukkit.PlayerCommandPreprocessListener;
 import me.stefan923.superdiscord.listeners.discord.MessageReceivedListener;
 import me.stefan923.superdiscord.settings.Setting;
 import me.stefan923.superdiscord.settings.SettingsManager;
 import me.stefan923.ultimateafk.UltimateAfk;
-import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -31,23 +31,23 @@ public class SuperDiscord extends JavaPlugin {
         settingsManager = SettingsManager.getInstance();
         settingsManager.setup(this);
 
+        LanguageManager languageManager = LanguageManager.getInstance();
+        languageManager.setup(this);
+
         discordCommandManager = new CommandManager(this);
         litebansDatabase = Database.get();
         ultimateAfkDatabase = UltimateAfk.getInstance().getDatabase("ultimateafk_logs");
 
-        loadDiscordBot();
-        loadBukkitListeners();
+        initBuilder();
+        initBukkitListeners();
     }
 
-    private void loadDiscordBot() {
-        JDABuilder builder = new JDABuilder(AccountType.BOT);
-
-        builder.setToken(Setting.TOKEN_ID);
-        builder.setAutoReconnect(true);
-        builder.setStatus(OnlineStatus.DO_NOT_DISTURB);
-        builder.setActivity(Activity.playing("with Stefan923"));
-        builder.addEventListeners(new MessageReceivedListener(this));
-
+    private void initBuilder() {
+        JDABuilder builder = JDABuilder.createDefault(Setting.TOKEN_ID)
+                .setAutoReconnect(true)
+                .setStatus(OnlineStatus.DO_NOT_DISTURB)
+                .setActivity(Activity.playing("with Stefan923"))
+                .addEventListeners(new MessageReceivedListener(this));
         try {
             jda = builder.build();
         } catch (Exception e) {
@@ -55,8 +55,7 @@ public class SuperDiscord extends JavaPlugin {
         }
     }
 
-    private void loadBukkitListeners() {
-        int i = 1;
+    private void initBukkitListeners() {
         PluginManager pluginManager = Bukkit.getServer().getPluginManager();
         pluginManager.registerEvents(new PlayerCommandPreprocessListener(jda), this);
     }
