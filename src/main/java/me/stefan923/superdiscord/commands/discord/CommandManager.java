@@ -2,19 +2,10 @@ package me.stefan923.superdiscord.commands.discord;
 
 import me.stefan923.superdiscord.SuperDiscord;
 import me.stefan923.superdiscord.commands.discord.type.*;
-import me.stefan923.superdiscord.commands.discord.type.config.CommandConfig;
-import me.stefan923.superdiscord.commands.discord.type.config.CommandConfigSetChannel;
-import me.stefan923.superdiscord.commands.discord.type.config.CommandConfigSetCommand;
-import me.stefan923.superdiscord.commands.discord.type.config.CommandConfigSetPrefix;
-import me.stefan923.superdiscord.commands.discord.type.factions.CommandFactionsTop;
-import me.stefan923.superdiscord.commands.discord.type.factions.CommandFactionsTopInfo;
-import me.stefan923.superdiscord.commands.discord.type.litebans.CommandLitebans;
-import me.stefan923.superdiscord.commands.discord.type.litebans.CommandLitebansCount;
-import me.stefan923.superdiscord.commands.discord.type.litebans.CommandLitebansStaffinfo;
-import me.stefan923.superdiscord.commands.discord.type.server.CommandServer;
-import me.stefan923.superdiscord.commands.discord.type.server.CommandServerGList;
-import me.stefan923.superdiscord.commands.discord.type.server.CommandServerLag;
-import me.stefan923.superdiscord.commands.discord.type.server.CommandServerStats;
+import me.stefan923.superdiscord.commands.discord.type.config.*;
+import me.stefan923.superdiscord.commands.discord.type.factions.*;
+import me.stefan923.superdiscord.commands.discord.type.litebans.*;
+import me.stefan923.superdiscord.commands.discord.type.server.*;
 import me.stefan923.superdiscord.exceptions.MissingPermissionException;
 import me.stefan923.superdiscord.language.Language;
 import me.stefan923.superdiscord.settings.Setting;
@@ -60,6 +51,7 @@ public class CommandManager implements DiscordMessageUtils {
         addCommand(new CommandConfigSetChannel(commandConfig));
         addCommand(new CommandConfigSetPrefix(commandConfig));
         addCommand(new CommandConfigSetCommand(commandConfig));
+        addCommand(new CommandConfigGetLang(commandConfig));
 
         addCommand(new CommandHelp());
 
