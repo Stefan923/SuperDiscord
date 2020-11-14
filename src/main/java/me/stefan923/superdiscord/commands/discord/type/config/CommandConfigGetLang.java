@@ -84,7 +84,7 @@ public class CommandConfigGetLang extends AbstractCommand implements DiscordMess
 
     @Override
     public String getSyntax() {
-        return "**" + Setting.COMMAND_PREFIX + "config setchannel <helpop>**\n\n`helpop` represents the text channel on which the messages sent through helpop will be received.\n";
+        return "**" + Setting.COMMAND_PREFIX + "config getLang**\n";
     }
 
     @Override
